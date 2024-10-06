@@ -1,4 +1,4 @@
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { storage } from '../index'
 
 export const handleUpload = async (file: File): Promise<string> => {
@@ -21,3 +21,19 @@ export const handleUpload = async (file: File): Promise<string> => {
       throw error;
     }
   };
+
+  export const listAndDownloadPDFs = async (): Promise<Array<{ name: string, url: string }>> => {
+    try {
+      const listRef = ref(storage, 'pdfs/');
+      const listResponse = await listAll(listRef);
+      const files: Array<{ name: string, url: string }> = [];
+      for (const itemRef of listResponse.items) {
+        const downloadURL = await getDownloadURL(itemRef);
+        files.push({ name: itemRef.name, url: downloadURL });
+      }
+      return files;
+    } catch (error) {
+      console.error("Error listing files:", error);
+      throw error;
+    }
+};

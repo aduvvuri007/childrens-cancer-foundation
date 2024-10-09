@@ -1,11 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+function App(): JSX.Element {
   return (
-    <div className="App">
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* Default/Login page */}
+        <Route
+          path="/" 
+          element={
+            <></>
+          } 
+        />
+        <Route
+          path="/login" 
+          element={
+            <></>
+          } 
+        />
+        {/* 404 page */}
+        <Route
+          path="*" 
+          element={
+            <></>
+          } 
+        />
+        <Route
+          path="/forgot-password" 
+          element={
+            <></>
+          } 
+        />
+        <Route
+          path="/create-account" 
+          element={
+            <></>
+          } 
+        />        
+        <Route
+          path="/applicant-dashboard" 
+          element={
+            <></>
+          } 
+        />        
+        {/* Admin dashboard */}
+        <Route
+          path="/admin" 
+          element={
+            <></>
+          } 
+        />      
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.15rem;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-container {
+    width: 50vw;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    height: fit-content;
+}
+
+.content {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.right-container {
+    width: 50%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.image-placeholder {
+    background-color: var(--color-yellow);
+    border-radius: 10px;
+    margin-right: 5%;
+    height: 100%;
+}
+
+.logo-app {
+    object-fit: contain;
+    max-width: 10%;
+    max-height: 10%;
+    width: auto;
+    height: auto;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    margin-left: 10px;
+    font-size: 1.5em;
+    color: var(--color-red);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-container label {
+    display: table-row;
+    margin-left: 8px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.form-container input {
+    height: 2em;
+    padding-left: 20px;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+.form-container select {
+    height: 2em;
+    padding-left: 10px;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+.form-container .radio-container {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+#radio-opts {
+   margin-top: 10px;
+   margin-bottom: 0;
+}
+
+input[type="radio"] {
+    vertical-align: middle;
+    margin-right: 10px;
+    accent-color: var(--color-blue);
+}
+
+.form-container .radio-container .radio-inputs {
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
+}
+
+.acc-req {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#link-to {
+    color: var(--color-blue);
+}
+
+.signup-btn {
+    background-color: var(--color-red);
+    color: white;
+    border-radius: 10px;
+    border-style: none;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-top: 10px;
+    font-weight: 500;
+}

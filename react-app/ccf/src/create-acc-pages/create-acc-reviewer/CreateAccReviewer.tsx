@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 function AccountPageReviewers(): JSX.Element {
   //form inputs
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
@@ -16,8 +17,17 @@ function AccountPageReviewers(): JSX.Element {
   const [capitalLetter, setCapitalLetter] = useState(false);
   const [number, setNumber] = useState(false);
   const [showReqs, setShowReqs] = useState(false);
+  const [pwdUnmatched, setPwdUnmatched] = useState(false);
 
-  useEffect(() => {}, [name, email, pwd, confirmPwd, affiliation]);
+  useEffect(() => {}, [
+    firstName,
+    lastName,
+    email,
+    pwd,
+    confirmPwd,
+    affiliation,
+    pwdUnmatched,
+  ]);
 
   /* Check if user input satisfies password requirements */
   const checkPasswordRequirements = (password: string) => {
@@ -26,9 +36,19 @@ function AccountPageReviewers(): JSX.Element {
     setNumber(/[0-9]/.test(password)); // Checks for number
   };
 
-  const handleSubmit = () => {
-    // let user submit if pwd reqs are met
-    if (specialChar && capitalLetter && number && showReqs) {
+  const handleSubmit = (e: any) => {
+    // don't let user submit if pwd reqs aren't met
+    console.log(specialChar, capitalLetter, number, showReqs, pwdUnmatched);
+    if (!specialChar || !capitalLetter || !number || pwdUnmatched) {
+      console.log("Failed to submit. One requirement was not met.");
+      e.preventDefault();
+      return;
+    }
+  }
+
+  const checkConfirmPwd = () => {
+    if (confirmPwd !== "") {
+      confirmPwd === pwd ? setPwdUnmatched(false) : setPwdUnmatched(true);
     }
   };
 
@@ -47,22 +67,42 @@ function AccountPageReviewers(): JSX.Element {
             </div>
 
             <form className="form-container2">
-              <label>Name*</label>
-              <input
-                type="text"
-                placeholder="Enter your first and last name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+              <div className="name-container">
+                <div>
+                  <label>First Name*</label>
+                  <input
+                    type="text"
+                    placeholder="Enter your first name"
+                    id="firstName"
+                    className="input"
+                    required
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div className="lastName-container">
+                  <label>Last Name*</label>
+                <input
+                  type="text"
+                  placeholder="Enter your last name"
+                  id="lastName"
+                  className="input"
+                  required
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+                </div>
+
+              </div>
 
               <label>Email*</label>
               <input
-                type="text"
+                type="email"
                 placeholder="Enter your email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="input"
               />
 
               <label>Password*</label>
@@ -77,6 +117,8 @@ function AccountPageReviewers(): JSX.Element {
                 }}
                 onFocus={() => setShowReqs(true)} // Show on focus
                 onBlur={() => setShowReqs(false)}
+                onKeyUp={checkConfirmPwd}
+                className="input"
               />
 
               {showReqs && (
@@ -122,16 +164,24 @@ function AccountPageReviewers(): JSX.Element {
                 required
                 value={confirmPwd}
                 onChange={(e) => setConfirmPwd(e.target.value)}
+                onKeyUp={checkConfirmPwd}
+                className="input"
               />
 
-              <label>Institution/Hospital Affiliation*</label>
+              {pwdUnmatched && (
+                <p className="validation2">Passwords do not match</p>
+              )}
+
+<label>Institution/Hospital Affiliation*</label>
               <input
                 type="text"
                 placeholder="Enter hospital name"
                 required
                 value={affiliation}
                 onChange={(e) => setAffiliation(e.target.value)}
+                className="input"
               />
+
 
               <p className="acc-req2">
                 Already have an account?{" "}

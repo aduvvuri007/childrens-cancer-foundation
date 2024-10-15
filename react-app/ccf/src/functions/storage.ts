@@ -22,16 +22,14 @@ export const uploadFileToStorage = async (file: File): Promise<string> => {
     }
   };
 
-export const downloadSpecificPDFS = async (arr: string[]): Promise<Array<{ name: string, url: string }>> => {
+export const downloadPDFsByName = async (names: string[]): Promise<Array<{ name: string, url: string }>> => {
   try {
-    const listRef = ref(storage, 'pdfs/');
-    const listResponse = await listAll(listRef);
     const files: Array<{ name: string, url: string }> = [];
-    for (const itemRef of listResponse.items) {
-      if (arr.includes(itemRef.name)) {
-        const downloadURL = await getDownloadURL(itemRef);
-        files.push({ name: itemRef.name, url: downloadURL });  
-      }
+    for (const name of names) {
+      const fileRef = ref(storage, `pdfs/${name}`);
+      const downloadURL = await getDownloadURL(fileRef);
+      files.push({ name, url: downloadURL });  
+
     }
     return files;
   } catch (error) {

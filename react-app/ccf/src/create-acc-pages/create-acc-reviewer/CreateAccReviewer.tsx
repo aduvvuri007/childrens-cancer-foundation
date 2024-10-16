@@ -44,7 +44,7 @@ function AccountPageReviewers(): JSX.Element {
       e.preventDefault();
       return;
     }
-  }
+  };
 
   const checkConfirmPwd = () => {
     if (confirmPwd !== "") {
@@ -82,17 +82,16 @@ function AccountPageReviewers(): JSX.Element {
                 </div>
                 <div className="lastName-container">
                   <label>Last Name*</label>
-                <input
-                  type="text"
-                  placeholder="Enter your last name"
-                  id="lastName"
-                  className="input"
-                  required
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
+                  <input
+                    type="text"
+                    placeholder="Enter your last name"
+                    id="lastName"
+                    className="input"
+                    required
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
                 </div>
-
               </div>
 
               <label>Email*</label>
@@ -158,21 +157,30 @@ function AccountPageReviewers(): JSX.Element {
               )}
 
               <label>Confirm Password*</label>
-              <input
-                type="password"
-                placeholder="Enter password again"
-                required
-                value={confirmPwd}
-                onChange={(e) => setConfirmPwd(e.target.value)}
-                onKeyUp={checkConfirmPwd}
-                className="input"
-              />
+              <div
+                className={
+                  !pwdUnmatched
+                    ? "confirm-pwd-container"
+                    : "confirm-pwd-container-exclaim"
+                }
+              >
+                <input
+                  type="password"
+                  placeholder="Enter password again"
+                  required
+                  value={confirmPwd}
+                  onChange={(e) => setConfirmPwd(e.target.value)}
+                  onKeyUp={checkConfirmPwd}
+                  className="input"
+                />
+                {pwdUnmatched && <p id="exclaim">!</p>}
+              </div>
 
               {pwdUnmatched && (
-                <p className="validation2">Passwords do not match</p>
+                <p className="validation">Passwords do not match</p>
               )}
 
-<label>Institution/Hospital Affiliation*</label>
+              <label>Institution/Hospital Affiliation*</label>
               <input
                 type="text"
                 placeholder="Enter hospital name"
@@ -181,7 +189,6 @@ function AccountPageReviewers(): JSX.Element {
                 onChange={(e) => setAffiliation(e.target.value)}
                 className="input"
               />
-
 
               <p className="acc-req2">
                 Already have an account?{" "}

@@ -44,7 +44,7 @@ function AccountPageApplicants(): JSX.Element {
       e.preventDefault();
       return;
     }
-  }
+  };
 
   const checkConfirmPwd = () => {
     if (confirmPwd !== "") {
@@ -54,158 +54,159 @@ function AccountPageApplicants(): JSX.Element {
 
   return (
     <div>
-    <div className="box2">
-      <div className="left-container2">
-        <div className="content2">
-          <div className="header-container2">
-            <img
-              src={logo}
-              className="logo2"
-              alt="Circular logo with red borders encompassing 'The children's cancer Foundation, Inc.' and three individuals in the middle"
-            />
-            <h1 className="header2">Create Account</h1>
-          </div>
-
-          <form className="form-container2">
-            <div className="name-container">
-              <div>
-                <label>First Name*</label>
-                <input
-                  type="text"
-                  placeholder="Enter your first name"
-                  id="firstName"
-                  className="input"
-                  required
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-              </div>
-              <div className="lastName-container">
-                <label>Last Name*</label>
-              <input
-                type="text"
-                placeholder="Enter your last name"
-                id="lastName"
-                className="input"
-                required
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+      <div className="box2">
+        <div className="left-container2">
+          <div className="content2">
+            <div className="header-container2">
+              <img
+                src={logo}
+                className="logo2"
+                alt="Circular logo with red borders encompassing 'The children's cancer Foundation, Inc.' and three individuals in the middle"
               />
-              </div>
-
+              <h1 className="header2">Create Account</h1>
             </div>
 
-            <label>Email*</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="input"
-            />
-
-            <label>Password*</label>
-            <input
-              type="password"
-              placeholder="Create a password"
-              required
-              value={pwd}
-              onChange={(e) => {
-                setPwd(e.target.value);
-                checkPasswordRequirements(e.target.value);
-              }}
-              onFocus={() => setShowReqs(true)} // Show on focus
-              onBlur={() => setShowReqs(false)}
-              onKeyUp={checkConfirmPwd}
-              className="input"
-            />
-
-            {showReqs && (
-              <div className="pwd-reqs">
-                <p>Password requires:</p>
-                <label id="checkbox">
+            <form className="form-container2">
+              <div className="name-container">
+                <div>
+                  <label>First Name*</label>
                   <input
-                    type="checkbox"
-                    name="options"
-                    value="Yes"
-                    checked={specialChar}
-                    readOnly
+                    type="text"
+                    placeholder="Enter your first name"
+                    id="firstName"
+                    className="input"
+                    required
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                   />
-                  One special character
-                </label>
-                <label id="checkbox">
+                </div>
+                <div className="lastName-container">
+                  <label>Last Name*</label>
                   <input
-                    type="checkbox"
-                    name="options"
-                    value="Yes"
-                    checked={capitalLetter}
-                    readOnly
+                    type="text"
+                    placeholder="Enter your last name"
+                    id="lastName"
+                    className="input"
+                    required
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
-                  One capital letter
-                </label>
-                <label id="checkbox">
-                  <input
-                    type="checkbox"
-                    name="options"
-                    value="Yes"
-                    checked={number}
-                    readOnly
-                  />
-                  One number
-                </label>
+                </div>
               </div>
-            )}
 
-            <label>Confirm Password*</label>
-            <input
-              type="password"
-              placeholder="Enter password again"
-              required
-              value={confirmPwd}
-              onChange={(e) => setConfirmPwd(e.target.value)}
-              onKeyUp={checkConfirmPwd}
-              className="input"
-            />
+              <label>Email*</label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input"
+              />
 
-            {pwdUnmatched && (
-              <p className="validation2">Passwords do not match</p>
-            )}
+              <label>Password*</label>
+              <input
+                type="password"
+                placeholder="Create a password"
+                required
+                value={pwd}
+                onChange={(e) => {
+                  setPwd(e.target.value);
+                  checkPasswordRequirements(e.target.value);
+                }}
+                onFocus={() => setShowReqs(true)} // Show on focus
+                onBlur={() => setShowReqs(false)}
+                onKeyUp={checkConfirmPwd}
+                className="input"
+              />
 
-<label>Institution/Hospital Affiliation*</label>
-            <input
-              type="text"
-              placeholder="Enter hospital name"
-              required
-              value={affiliation}
-              onChange={(e) => setAffiliation(e.target.value)}
-              className="input"
-            />
+              {showReqs && (
+                <div className="pwd-reqs">
+                  <p>Password requires:</p>
+                  <label id="checkbox">
+                    <input
+                      type="checkbox"
+                      name="options"
+                      value="Yes"
+                      checked={specialChar}
+                      readOnly
+                    />
+                    One special character
+                  </label>
+                  <label id="checkbox">
+                    <input
+                      type="checkbox"
+                      name="options"
+                      value="Yes"
+                      checked={capitalLetter}
+                      readOnly
+                    />
+                    One capital letter
+                  </label>
+                  <label id="checkbox">
+                    <input
+                      type="checkbox"
+                      name="options"
+                      value="Yes"
+                      checked={number}
+                      readOnly
+                    />
+                    One number
+                  </label>
+                </div>
+              )}
 
+              <label>Confirm Password*</label>
+              <div className={!pwdUnmatched? "confirm-pwd-container" : "confirm-pwd-container-exclaim"}>
+                <input
+                  type="password"
+                  placeholder="Enter password again"
+                  required
+                  value={confirmPwd}
+                  onChange={(e) => setConfirmPwd(e.target.value)}
+                  onKeyUp={checkConfirmPwd}
+                  className="input"
+                />
+                {pwdUnmatched && (<p id="exclaim">!</p>)}
+              </div>
 
-            <p className="acc-req2">
-              Already have an account?{" "}
-              <Link to="/log-in" className="acc-req2" id="link-to">
-                <b>Log in</b>
-              </Link>{" "}
-            </p>
-            <button
-              type="submit"
-              className="signup-btn2"
-              onClick={handleSubmit}
-            >
-              Sign Up
-            </button>
-          </form>
+              {pwdUnmatched && (
+                <p className="validation">Passwords do not match</p>
+              )}
+
+              <label>Institution/Hospital Affiliation*</label>
+              <input
+                type="text"
+                placeholder="Enter hospital name"
+                required
+                value={affiliation}
+                onChange={(e) => setAffiliation(e.target.value)}
+                className="input"
+              />
+
+              <p className="acc-req2">
+                Already have an account?{" "}
+                <Link to="/log-in" className="acc-req2" id="link-to">
+                  <b>Log in</b>
+                </Link>
+              </p>
+              <button
+                type="submit"
+                className="signup-btn2"
+                onClick={handleSubmit}
+              >
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div className="right-container2">
+          {/* remove once given image */}
+          <div className="image-placeholder2"></div>
         </div>
       </div>
-
-      <div className="right-container2">
-        {/* remove once given image */}
-        <div className="image-placeholder2"></div>
-      </div>
     </div>
-  </div>
   );
 }
 

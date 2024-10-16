@@ -3,3 +3,5 @@ react-app/ccf/src/firebase_config/FireConfig.ts
 /.idea
 /react-app/.idea
 *.log
+
+*.env

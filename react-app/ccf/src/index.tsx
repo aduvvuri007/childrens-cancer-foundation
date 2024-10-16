@@ -7,9 +7,34 @@ import { getAnalytics } from "firebase/analytics";
 //If this line says import not found then you need to set up firebase api on your machine
 import firebaseConfig from "./firebase_config/FireConfig";
 
+//import the connections
+import { getAuth, connectAuthEmulator } from "firebase/auth";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getStorage, connectStorageEmulator } from "firebase/storage";
 
+// firebaseApps previously initialized using initializeApp()
 const cong = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(cong);
+
+
+//database emulator connection
+const db = getFirestore();
+//cloud storage emulator connection
+const storage = getStorage();
+//authentication emulator connection
+const auth = getAuth();
+
+
+//flag for local testing
+const useEmulator = process.env.LOCAL_TESTING === "true";
+
+if (useEmulator) {
+  connectFirestoreEmulator(db, '127.0.0.1', 8080);
+  connectStorageEmulator(storage, "127.0.0.1", 9199);
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+
+}
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

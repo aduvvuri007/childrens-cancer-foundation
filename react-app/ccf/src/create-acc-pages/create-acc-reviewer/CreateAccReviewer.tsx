@@ -1,7 +1,10 @@
 import "./CreateAccReviewer.css";
 import logo from "../../assets/ccf-logo.png";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { getAuth, createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
+import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
 
 function AccountPageReviewers(): JSX.Element {
   //form inputs
@@ -18,6 +21,8 @@ function AccountPageReviewers(): JSX.Element {
   const [number, setNumber] = useState(false);
   const [showReqs, setShowReqs] = useState(false);
   const [pwdUnmatched, setPwdUnmatched] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {}, [
     firstName,
@@ -36,13 +41,49 @@ function AccountPageReviewers(): JSX.Element {
     setNumber(/[0-9]/.test(password)); // Checks for number
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const functions = getFunctions();
+    const addReviewerRole = httpsCallable(functions, "addReviewerRole");
     // don't let user submit if pwd reqs aren't met
     console.log(specialChar, capitalLetter, number, showReqs, pwdUnmatched);
     if (!specialChar || !capitalLetter || !number || pwdUnmatched) {
       console.log("Failed to submit. One requirement was not met.");
       e.preventDefault();
       return;
+    }
+
+    const auth = getAuth();
+    const db = getFirestore();
+    let user = null
+ 
+ 
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, pwd);
+      user = userCredential.user;
+      await setDoc(doc(db, 'reviewers', user.uid), {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        affiliation: affiliation,
+        role: 'reviewer',
+      });
+      await addReviewerRole({email: email})
+      .then((result) => {
+        console.log(result.data);  // Success message from the function
+      })
+      .catch((error) => {
+        console.log('Error: ', error);
+      });
+      console.log(user);
+      
+      navigate("/reviewer-dashboard");
+    } catch (error) {
+      if(user !== null){
+        await deleteUser(user);
+        await deleteDoc(doc(db, 'reviewers', user.uid));
+      }
+      console.log(error);
     }
   };
 

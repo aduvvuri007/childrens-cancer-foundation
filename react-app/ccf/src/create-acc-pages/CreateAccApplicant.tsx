@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./CreateAccApplicant.css";
 import logo from "../assets/ccf-logo.png";
 import { useEffect, useState } from "react";
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { getAuth, createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
+import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
+
 
 function AccountPageApplicants(): JSX.Element {
   //form inputs
@@ -18,6 +22,8 @@ function AccountPageApplicants(): JSX.Element {
   const [number, setNumber] = useState(false);
   const [showReqs, setShowReqs] = useState(false);
   const [pwdUnmatched, setPwdUnmatched] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {}, [
     firstName,
@@ -36,13 +42,45 @@ function AccountPageApplicants(): JSX.Element {
     setNumber(/[0-9]/.test(password)); // Checks for number
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     // don't let user submit if pwd reqs aren't met
+    e.preventDefault();
+    const functions = getFunctions();
+    const addApplicantRole = httpsCallable(functions, "addApplicantRole");
     console.log(specialChar, capitalLetter, number, showReqs, pwdUnmatched);
     if (!specialChar || !capitalLetter || !number || pwdUnmatched) {
       console.log("Failed to submit. One requirement was not met.");
       e.preventDefault();
       return;
+    }
+    const auth = getAuth();
+    const db = getFirestore();
+    let user = null;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, pwd);
+      user = userCredential.user;
+      await setDoc(doc(db, "applicants", user.uid), {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        affiliation: affiliation,
+        role: "applicant",
+      });
+      await addApplicantRole({ email: email })
+      .then((result) => {
+        console.log(result.data);  // Success message from the function
+      })
+      .catch((error) => {
+        console.log('Error: ', error);
+      });
+      navigate("/applicant-dashboard");
+    } catch (e) {
+      if(user !== null){
+        await deleteUser(user);
+        await deleteDoc(doc(db, 'applicants', user.uid));
+      }
+      console.error(e);
     }
   };
 

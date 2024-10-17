@@ -137,7 +137,6 @@
     font-size: smaller;
 }
 
-
 .confirm-pwd-container {
     box-sizing: border-box;
     display: flex;
@@ -152,10 +151,10 @@
     border: solid var(--color-red);
  }
  
- .confirm-pwd-container .input {
-     border: none;
-     outline: none;
- }
+.confirm-pwd-container .input {
+    border: none;
+    outline: none;
+}
 
   .confirm-pwd-container-exclaim {
     box-sizing: border-box;
@@ -205,4 +204,15 @@
     margin-top: 10px;
     font-weight: 500;
     cursor: pointer;
+}
+
+.disable-submit {
+    background-color: #5B5B5B;
+    color: #949494;
+    border-radius: 10px;
+    border-style: none;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-top: 10px;
+    font-weight: 500;
 }

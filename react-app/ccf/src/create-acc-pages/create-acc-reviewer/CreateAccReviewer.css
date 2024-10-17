@@ -128,7 +128,7 @@
    font-size: smaller;
 }
 
-.pwd-reqs #checkbox input[type="checkbox"] {
+.pwd-reqs input[type="checkbox"] {
     margin-left: 10px;
     vertical-align: middle;
     margin-right: 10px;
@@ -138,16 +138,14 @@
 }
 
 .pwd-reqs #checkbox input[type="checkbox"]:not(:checked):not(:disabled) {
-    appearance: none;
+    accent-color: grey;
     margin-right: 11px;
     margin-left: 10px;
     width: 12px;
     height: 12px;
     border-radius: 2px;
-    background: grey;
-  }
-  
-
+    color: grey;
+}
 
 .confirm-pwd-container {
     box-sizing: border-box;

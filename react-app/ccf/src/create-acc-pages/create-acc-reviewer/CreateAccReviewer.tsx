@@ -198,8 +198,9 @@ function AccountPageReviewers(): JSX.Element {
               </p>
               <button
                 type="submit"
-                className="signup-btn2"
+                className={(!specialChar || !capitalLetter || !number || pwdUnmatched) ? "disable-submit" : "signup-btn2"}
                 onClick={handleSubmit}
+                disabled={(!specialChar || !capitalLetter || !number || pwdUnmatched)}
               >
                 Sign Up
               </button>

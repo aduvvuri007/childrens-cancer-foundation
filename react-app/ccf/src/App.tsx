@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ApplicantUsersDashboard from './applicant-dashboard/ApplicantDashboard';
 
 function App(): JSX.Element {
   return (
@@ -40,7 +41,7 @@ function App(): JSX.Element {
         <Route
           path="/applicant-dashboard" 
           element={
-            <></>
+            <ApplicantUsersDashboard />
           } 
         />        
         {/* Admin dashboard */}

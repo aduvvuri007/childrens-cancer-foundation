@@ -28,7 +28,7 @@ export const addReviewerRole = functions.https.onCall((data: any, context: any) 
     }
     ).then(() => {
         return {
-            message: `Success! ${data.email} has been made an admin.`
+            message: `Success! ${data.email} has been made a reviewer.`
         };
     }).catch((err: any) => {
         return err;
@@ -43,7 +43,7 @@ export const addApplicantRole = functions.https.onCall((data: any, context: any)
     }
     ).then(() => {
         return {
-            message: `Success! ${data.email} has been made an admin.`
+            message: `Success! ${data.email} has been made an applicant.`
         };
     }).catch((err: any) => {
         return err;

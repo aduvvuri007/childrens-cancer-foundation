@@ -75,7 +75,6 @@ function AccountPageReviewers(): JSX.Element {
       .catch((error) => {
         console.log('Error: ', error);
       });
-      console.log(user);
       
       navigate("/reviewer-dashboard");
     } catch (error) {

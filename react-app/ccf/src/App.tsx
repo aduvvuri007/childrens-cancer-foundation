@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ApplicationForm from './application-form/ApplicationForm';
 
 function App(): JSX.Element {
   return (
@@ -42,7 +43,13 @@ function App(): JSX.Element {
           element={
             <></>
           } 
-        />        
+        />    
+        <Route
+          path="/application-form"
+          element={
+            <ApplicationForm />
+          }
+        />  
         {/* Admin dashboard */}
         <Route
           path="/admin" 

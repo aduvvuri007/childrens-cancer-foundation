@@ -22,6 +22,9 @@ function AccountPageReviewers(): JSX.Element {
   const [showReqs, setShowReqs] = useState(false);
   const [pwdUnmatched, setPwdUnmatched] = useState(false);
 
+  //email req
+  const [emailError, setEmailError] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {}, [
@@ -39,6 +42,16 @@ function AccountPageReviewers(): JSX.Element {
     setSpecialChar(/[\W_]/.test(password)); // Checks for special character
     setCapitalLetter(/[A-Z]/.test(password)); // Checks for capital letter
     setNumber(/[0-9]/.test(password)); // Checks for number
+  };
+
+  const checkEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.(com|edu|org)$/i;
+    
+    if (!emailRegex.test(email)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
   };
 
   const handleSubmit = async (e: any) => {
@@ -140,9 +153,16 @@ function AccountPageReviewers(): JSX.Element {
                 placeholder="Enter your email"
                 required
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  checkEmail(e.target.value);
+                }}
                 className="input"
               />
+
+              {emailError && (
+                <p className="validation">Please enter a valid email address</p>
+              )}
 
               <label>Password*</label>
               <input
@@ -238,9 +258,9 @@ function AccountPageReviewers(): JSX.Element {
               </p>
               <button
                 type="submit"
-                className={(!specialChar || !capitalLetter || !number || pwdUnmatched) ? "disable-submit" : "signup-btn2"}
+                className={(!specialChar || !capitalLetter || !number || pwdUnmatched || emailError) ? "disable-submit" : "signup-btn2"}
                 onClick={handleSubmit}
-                disabled={(!specialChar || !capitalLetter || !number || pwdUnmatched)}
+                disabled={(!specialChar || !capitalLetter || !number || pwdUnmatched || emailError)}
               >
                 Sign Up
               </button>

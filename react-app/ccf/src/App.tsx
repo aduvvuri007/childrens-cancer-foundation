@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountPageApplicants from './create-acc-pages/CreateAccApplicant';
 import AccountPageReviewers from './create-acc-pages/create-acc-reviewer/CreateAccReviewer';
+import ApplicantUsersDashboard from './applicant-dashboard/ApplicantDashboard';
 
 function App(): JSX.Element {
   return (
@@ -43,7 +44,7 @@ function App(): JSX.Element {
         <Route
           path="/applicant-dashboard" 
           element={
-            <></>
+            <ApplicantUsersDashboard />
           } 
         />        
         {/* Admin dashboard */}

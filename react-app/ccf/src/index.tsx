@@ -19,11 +19,11 @@ const cong = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(cong);
 
 
-//database emulator connection
+// firestore database connection
 const db = getFirestore();
-//cloud storage emulator connection
+// cloud storage connection
 const storage = getStorage();
-//authentication emulator connection
+// auth connection
 const auth = getAuth();
 // functions connection
 const functions = getFunctions();

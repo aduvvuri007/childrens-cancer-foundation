@@ -1,6 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
-import { db } from '../index'
-
+import { db } from '../index';
+import { uploadFileToStorage } from "../functions/storage";
 
 interface ApplicationInfo {
     title: string;
@@ -32,13 +32,14 @@ interface GrantInfo {
     pdf: string;
 }
 
-
 export const writeApplicationInfo = async( 
     applicationInfo: ApplicationInfo, 
     applicationQuestions: ApplicationQuestions, 
-    grantInfo: GrantInfo
+    file: File 
 ) => {
     try {
+        const pdfUrl = await uploadFileToStorage(file);
+        
         const newApplicationRef = doc(db, 'applications', Date.now().toString());
         await setDoc(newApplicationRef, {
             title: applicationInfo.title,
@@ -62,14 +63,14 @@ export const writeApplicationInfo = async(
             dates: applicationQuestions.dates,
             continuation: applicationQuestions.continuation,
             ...(applicationQuestions.continuationYears && { continuationYears: applicationQuestions.continuationYears }),
-            pdf: grantInfo.pdf,
-        })
+            pdf: pdfUrl, 
+        });
 
     } catch (error) {
         console.error("Error writing application data:", error);
         throw error;
     }
-}
+};
 
 const mockApplicationInfo: ApplicationInfo = {
     title: "Cancer Research Grant",
@@ -97,8 +98,6 @@ const mockApplicationQuestions: ApplicationQuestions = {
     continuationYears: "2 years"
 };
 
-const mockGrantInfo: GrantInfo = {
-    pdf: "url_to_grant_pdf"
-};
+const mockFile = new File([""], "mockfile.pdf"); 
 
-writeApplicationInfo(mockApplicationInfo, mockApplicationQuestions, mockGrantInfo);
+writeApplicationInfo(mockApplicationInfo, mockApplicationQuestions, mockFile);

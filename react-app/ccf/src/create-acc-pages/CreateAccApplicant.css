@@ -156,7 +156,6 @@
 .confirm-pwd-container {
     box-sizing: border-box;
     display: flex;
-    border: solid black;
     border-radius: 10px;
  }
 

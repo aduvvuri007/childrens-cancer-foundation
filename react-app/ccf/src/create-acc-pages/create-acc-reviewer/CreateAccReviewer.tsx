@@ -89,7 +89,7 @@ function AccountPageReviewers(): JSX.Element {
         console.log('Error: ', error);
       });
       
-      navigate("/reviewer-dashboard");
+      navigate("/login");
     } catch (error) {
       if(user !== null){
         await deleteUser(user);
@@ -216,6 +216,10 @@ function AccountPageReviewers(): JSX.Element {
                 </div>
               )}
 
+              {((!specialChar || !number || !capitalLetter) && pwd && !showReqs) &&  (
+                <p className="validation">At least one password requirement was not met</p>
+              )}
+
               <label>Confirm Password*</label>
               <div
                 className={
@@ -258,9 +262,31 @@ function AccountPageReviewers(): JSX.Element {
               </p>
               <button
                 type="submit"
-                className={(!specialChar || !capitalLetter || !number || pwdUnmatched || emailError) ? "disable-submit" : "signup-btn2"}
+                className={(
+                  !firstName ||
+                  !lastName ||
+                  !affiliation ||
+                  !email ||
+                  !pwd ||
+                  (pwd && !confirmPwd) ||
+                  !specialChar ||
+                  !capitalLetter ||
+                  !number ||
+                  pwdUnmatched ||
+                  emailError) ? "disable-submit" : "signup-btn2"}
                 onClick={handleSubmit}
-                disabled={(!specialChar || !capitalLetter || !number || pwdUnmatched || emailError)}
+                disabled={(
+                  !firstName ||
+                  !lastName ||
+                  !affiliation ||
+                  !email ||
+                  !pwd ||
+                  (pwd && !confirmPwd) ||
+                  !specialChar ||
+                  !capitalLetter ||
+                  !number ||
+                  pwdUnmatched ||
+                  emailError)}
               >
                 Sign Up
               </button>

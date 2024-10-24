@@ -3,9 +3,12 @@ import "./CreateAccApplicant.css";
 import logo from "../assets/ccf-logo.png";
 import { useEffect, useState } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { getAuth, createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  deleteUser,
+} from "firebase/auth";
 import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
-
 
 function AccountPageApplicants(): JSX.Element {
   //form inputs
@@ -47,7 +50,7 @@ function AccountPageApplicants(): JSX.Element {
 
   const checkEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.(com|edu|org)$/i;
-    
+
     if (!emailRegex.test(email)) {
       setEmailError(true);
     } else {
@@ -71,7 +74,11 @@ function AccountPageApplicants(): JSX.Element {
     let user = null;
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, pwd);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        pwd
+      );
       user = userCredential.user;
       await setDoc(doc(db, "applicants", user.uid), {
         firstName: firstName,
@@ -81,17 +88,17 @@ function AccountPageApplicants(): JSX.Element {
         role: "applicant",
       });
       await addApplicantRole({ email: email })
-      .then((result) => {
-        console.log(result.data);  // Success message from the function
-      })
-      .catch((error) => {
-        console.log('Error: ', error);
-      });
-      navigate("/applicant-dashboard");
+        .then((result) => {
+          console.log(result.data); // Success message from the function
+        })
+        .catch((error) => {
+          console.log("Error: ", error);
+        });
+      navigate("/login");
     } catch (e) {
-      if(user !== null){
+      if (user !== null) {
         await deleteUser(user);
-        await deleteDoc(doc(db, 'applicants', user.uid));
+        await deleteDoc(doc(db, "applicants", user.uid));
       }
       console.error(e);
     }
@@ -215,7 +222,13 @@ function AccountPageApplicants(): JSX.Element {
               )}
 
               <label>Confirm Password*</label>
-              <div className={!pwdUnmatched? "confirm-pwd-container" : "confirm-pwd-container-exclaim"}>
+              <div
+                className={
+                  !pwdUnmatched
+                    ? "confirm-pwd-container"
+                    : "confirm-pwd-container-exclaim"
+                }
+              >
                 <input
                   type="password"
                   placeholder="Enter password again"
@@ -225,7 +238,7 @@ function AccountPageApplicants(): JSX.Element {
                   onKeyUp={checkConfirmPwd}
                   className="input"
                 />
-                {pwdUnmatched && (<p id="exclaim">!</p>)}
+                {pwdUnmatched && <p id="exclaim">!</p>}
               </div>
 
               {pwdUnmatched && (
@@ -250,9 +263,35 @@ function AccountPageApplicants(): JSX.Element {
               </p>
               <button
                 type="submit"
-                className={(!specialChar || !capitalLetter || !number || pwdUnmatched || emailError) ? "disable-submit" : "signup-btn2"}
+                className={
+                  !firstName ||
+                  !lastName ||
+                  !affiliation ||
+                  !email ||
+                  !pwd ||
+                  (pwd && !confirmPwd) ||
+                  !specialChar ||
+                  !capitalLetter ||
+                  !number ||
+                  pwdUnmatched ||
+                  emailError
+                    ? "disable-submit"
+                    : "signup-btn2"
+                }
                 onClick={handleSubmit}
-                disabled={(!specialChar || !capitalLetter || !number || pwdUnmatched || emailError)}
+                disabled={
+                  !firstName ||
+                  !lastName ||
+                  !affiliation ||
+                  !email ||
+                  !pwd ||
+                  (pwd && !confirmPwd) ||
+                  !specialChar ||
+                  !capitalLetter ||
+                  !number ||
+                  pwdUnmatched ||
+                  emailError
+                }
               >
                 Sign Up
               </button>

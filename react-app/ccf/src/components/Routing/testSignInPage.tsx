@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
       if (idTokenResult.claims.role === 'admin') {
         navigate('/admin');
       } else {
-        navigate('/'); // or wherever non-admin users should go
+        navigate('/'); 
       }
     } catch (err) {
       setError('Failed to sign in. Please check your credentials.');

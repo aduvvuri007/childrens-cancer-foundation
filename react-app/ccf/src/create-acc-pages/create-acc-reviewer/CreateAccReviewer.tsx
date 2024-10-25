@@ -1,5 +1,5 @@
 import "./CreateAccReviewer.css";
-import logo from "../../assets/ccf-logo.png";
+import logo from '../../assets/ccf-logo.png';
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getFunctions, httpsCallable } from "firebase/functions";

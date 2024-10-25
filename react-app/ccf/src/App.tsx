@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AccountPageApplicants from './create-acc-pages/CreateAccApplicant';
+import AccountPageApplicants from './create-acc-pages/create-acc-applicants/CreateAccApplicant';
 import AccountPageReviewers from './create-acc-pages/create-acc-reviewer/CreateAccReviewer';
 import ApplicantUsersDashboard from './applicant-dashboard/ApplicantDashboard';
 

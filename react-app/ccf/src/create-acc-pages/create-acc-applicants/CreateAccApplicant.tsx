@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./CreateAccApplicant.css";
-import logo from "../assets/ccf-logo.png";
+import logo from '../../assets/ccf-logo.png';
 import { useEffect, useState } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import {
@@ -219,6 +219,10 @@ function AccountPageApplicants(): JSX.Element {
                     One number
                   </label>
                 </div>
+              )}
+
+              {((!specialChar || !number || !capitalLetter) && pwd && !showReqs) &&  (
+                <p className="validation">At least one password requirement was not met</p>
               )}
 
               <label>Confirm Password*</label>

@@ -1,12 +1,14 @@
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './pages/login';
+import Signup from './pages/signup';
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ApplicantUsersDashboard from './applicant-dashboard/ApplicantDashboard';
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Default/Login page */}
+    <Routes>
         <Route
           path="/" 
           element={
@@ -14,9 +16,9 @@ function App(): JSX.Element {
           } 
         />
         <Route
-          path="/login" 
+          path="/Login" 
           element={
-            <></>
+            <Login />
           } 
         />
         {/* 404 page */}
@@ -43,15 +45,15 @@ function App(): JSX.Element {
           element={
             <ApplicantUsersDashboard />
           } 
-        />        
-        {/* Admin dashboard */}
+        />    
+        {/* Admin dashboard */}   
         <Route
           path="/admin" 
           element={
             <></>
           } 
-        />      
-      </Routes>
+        /> 
+        </Routes>     
     </BrowserRouter>
   );
 }

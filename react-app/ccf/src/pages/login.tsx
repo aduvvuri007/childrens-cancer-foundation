@@ -7,14 +7,22 @@ function Login() {
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState<string | null>(null);
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     const email = input.email.toLowerCase().trim();
     const password = input.password;
-
+    if(validateEmail(email) === false){
+      setError("Please enter a valid email address.")
+    }else{
     const { error: loginError } = await loginUser(email, password);
     if (loginError) setError(loginError);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

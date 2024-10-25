@@ -8,6 +8,7 @@ import ApplicantUsersDashboard from './applicant-dashboard/ApplicantDashboard';
 function App(): JSX.Element {
   return (
     <BrowserRouter>
+    <Routes>
         <Route
           path="/" 
           element={
@@ -15,7 +16,7 @@ function App(): JSX.Element {
           } 
         />
         <Route
-          path="/login" 
+          path="/Login" 
           element={
             <Login />
           } 
@@ -44,15 +45,15 @@ function App(): JSX.Element {
           element={
             <ApplicantUsersDashboard />
           } 
-        />        
-        {/* Admin dashboard */}
+        />    
+        {/* Admin dashboard */}   
         <Route
           path="/admin" 
           element={
             <></>
           } 
-        />      
-      </Routes>
+        /> 
+        </Routes>     
     </BrowserRouter>
   );
 }

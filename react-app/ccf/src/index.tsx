@@ -11,7 +11,7 @@ import firebaseConfig from "./firebase_config/FireConfig";
 
 
 const cong = initializeApp(firebaseConfig);
-const firestore = getFirestore(cong);
+const db = getFirestore(cong);
 const storage = getStorage(cong);
 // const analytics = getAnalytics(cong);
 
@@ -29,4 +29,4 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-export { cong, firestore, storage };
+export { cong, db, storage };

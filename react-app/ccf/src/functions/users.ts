@@ -1,25 +1,6 @@
-import { firestore } from '../index';
+import { db } from '../index';
 import { collection, doc, setDoc, deleteDoc, updateDoc, getDoc } from 'firebase/firestore';
-
-// ApplicantUser interface
-interface ApplicantUser {
-  userId: string;                     //required
-  name: string;                       //required
-  title: string;                      //required
-  email: string;                      //required
-  institutionalAffiliation: string;   //required
-  principalInvestigator: string;      //required
-  applyingFor: string;                
-  receivedPriorCCFFunding: boolean;   
-}
-
-// ReviewerUser interface
-interface ReviewerUser {
-  userId: string;                     //required
-  name: string;                       //required
-  email: string;                      //required
-  institutionalAffiliation: string;   //required
-}
+import { ApplicantUser, ReviewerUser } from './usertypes';
 
 // Function to add a new applicant user
 export const addApplicantUser = async (user: ApplicantUser): Promise<void> => {
@@ -27,7 +8,7 @@ export const addApplicantUser = async (user: ApplicantUser): Promise<void> => {
     if (!user.userId || !user.name || !user.title || !user.email || !user.institutionalAffiliation || !user.principalInvestigator) {
       throw new Error('Missing required fields: userId, name, title, email, institutionalAffiliation, or principalInvestigator');
     }
-    const userRef = doc(collection(firestore, 'applicantUsers'), user.userId);
+    const userRef = doc(collection(db, 'applicantUsers'), user.userId);
     await setDoc(userRef, user);
   } catch (error) {
     console.error('Error adding applicant user:', error);
@@ -41,7 +22,7 @@ export const addReviewerUser = async (user: ReviewerUser): Promise<void> => {
     if (!user.userId || !user.name || !user.email || !user.institutionalAffiliation) {
       throw new Error('Missing required fields: userId, name, email, or institutionalAffiliation');
     }
-    const userRef = doc(collection(firestore, 'reviewerUsers'), user.userId);
+    const userRef = doc(collection(db, 'reviewerUsers'), user.userId);
     await setDoc(userRef, user);
   } catch (error) {
     console.error('Error adding reviewer user:', error);
@@ -52,7 +33,7 @@ export const addReviewerUser = async (user: ReviewerUser): Promise<void> => {
 // Function to delete an applicant user
 export const deleteApplicantUser = async (userId: string): Promise<void> => {
   try {
-    const userRef = doc(collection(firestore, 'applicantUsers'), userId);
+    const userRef = doc(collection(db, 'applicantUsers'), userId);
     await deleteDoc(userRef);
   } catch (error) {
     console.error('Error deleting applicant user:', error);
@@ -63,7 +44,7 @@ export const deleteApplicantUser = async (userId: string): Promise<void> => {
 // Function to delete a reviewer user
 export const deleteReviewerUser = async (userId: string): Promise<void> => {
   try {
-    const userRef = doc(collection(firestore, 'reviewerUsers'), userId);
+    const userRef = doc(collection(db, 'reviewerUsers'), userId);
     await deleteDoc(userRef);
   } catch (error) {
     console.error('Error deleting reviewer user:', error);
@@ -83,7 +64,7 @@ export const editApplicantUser = async (userId: string, updates: Partial<Applica
     if (updates.institutionalAffiliation && updates.institutionalAffiliation.trim() === '') {
       throw new Error('Institutional Affiliation cannot be empty');
     }
-    const userRef = doc(collection(firestore, 'applicantUsers'), userId);
+    const userRef = doc(collection(db, 'applicantUsers'), userId);
     await updateDoc(userRef, updates);
   } catch (error) {
     console.error('Error editing applicant user:', error);
@@ -100,7 +81,7 @@ export const editReviewerUser = async (userId: string, updates: Partial<Reviewer
     if (updates.institutionalAffiliation && updates.institutionalAffiliation.trim() === '') {
       throw new Error('Institutional Affiliation cannot be empty');
     }
-    const userRef = doc(collection(firestore, 'reviewerUsers'), userId);
+    const userRef = doc(collection(db, 'reviewerUsers'), userId);
     await updateDoc(userRef, updates);
   } catch (error) {
     console.error('Error editing reviewer user:', error);
@@ -111,7 +92,7 @@ export const editReviewerUser = async (userId: string, updates: Partial<Reviewer
 // Function to get an applicant user
 export const getApplicantUser = async (userId: string): Promise<ApplicantUser | null> => {
   try {
-    const userRef = doc(collection(firestore, 'applicantUsers'), userId);
+    const userRef = doc(collection(db, 'applicantUsers'), userId);
     const userSnap = await getDoc(userRef);
     if (userSnap.exists()) {
       return userSnap.data() as ApplicantUser;
@@ -127,7 +108,7 @@ export const getApplicantUser = async (userId: string): Promise<ApplicantUser | 
 // Function to get a reviewer user
 export const getReviewerUser = async (userId: string): Promise<ReviewerUser | null> => {
   try {
-    const userRef = doc(collection(firestore, 'reviewerUsers'), userId);
+    const userRef = doc(collection(db, 'reviewerUsers'), userId);
     const userSnap = await getDoc(userRef);
     if (userSnap.exists()) {
       return userSnap.data() as ReviewerUser;

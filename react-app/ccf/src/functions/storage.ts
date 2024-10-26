@@ -1,7 +1,7 @@
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { storage } from '../index'
 
-export const handleUpload = async (file: File): Promise<string> => {
+export const uploadFileToStorage = async (file: File): Promise<string> => {
     if (!file) {
       throw new Error('No file selected');
     }
@@ -22,7 +22,24 @@ export const handleUpload = async (file: File): Promise<string> => {
     }
   };
 
-  export const listAndDownloadPDFs = async (): Promise<Array<{ name: string, url: string }>> => {
+export const downloadPDFsByName = async (names: string[]): Promise<Array<{ name: string, url: string }>> => {
+  try {
+    const files: Array<{ name: string, url: string }> = [];
+    for (const name of names) {
+      const fileRef = ref(storage, `pdfs/${name}`);
+      const downloadURL = await getDownloadURL(fileRef);
+      files.push({ name, url: downloadURL });  
+
+    }
+    return files;
+  } catch (error) {
+    console.error("Error listing files:", error);
+    throw error;
+  }
+  
+}
+
+  export const listAndDownloadAllPDFs = async (): Promise<Array<{ name: string, url: string }>> => {
     try {
       const listRef = ref(storage, 'pdfs/');
       const listResponse = await listAll(listRef);

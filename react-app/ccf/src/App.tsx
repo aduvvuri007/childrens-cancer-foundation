@@ -3,6 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/login';
 import Signup from './pages/signup';
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AccountPageApplicants from './create-acc-pages/create-acc-applicants/CreateAccApplicant';
+import AccountPageReviewers from './create-acc-pages/create-acc-reviewer/CreateAccReviewer';
 import ApplicantUsersDashboard from './applicant-dashboard/ApplicantDashboard';
 
 function App(): JSX.Element {
@@ -34,10 +37,11 @@ function App(): JSX.Element {
             <></>
           } 
         />
+        {/* Need to change path to create-account after authentication */}
         <Route
-          path="/create-account" 
+          path="/create-account-applicants" 
           element={
-            <></>
+            <AccountPageApplicants />
           } 
         />        
         <Route
@@ -52,8 +56,15 @@ function App(): JSX.Element {
           element={
             <></>
           } 
-        /> 
-        </Routes>     
+        />
+        {/* Need to change path to create-account after authentication */}
+        <Route
+          path="/create-account-reviewers" 
+          element={
+            <AccountPageReviewers />
+          } 
+        />            
+      </Routes>
     </BrowserRouter>
   );
 }

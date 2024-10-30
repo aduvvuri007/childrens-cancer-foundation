@@ -2,32 +2,34 @@
 .sidebar {
   width: 250px;
   height: 100vh;
-  background-color: #f3f3f3;
+  background-color: #003366;
   transition: width 0.3s ease-in-out;
   position: fixed;
   top: 0;
   left: 0;
   padding: 20px;
+  font-family: "Poppins", sans-serif;
 }
 
 .sidebar.collapsed {
   width: 60px;
-  padding: 10px; /* Reduce padding when collapsed */
+  padding: 10px;
 }
 
 .sidebar-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
 .toggle-btn {
-  background-color: #f4f4f4;
+  background-color: #003366;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+  color: #f4f4f4;
 }
 
 .sidebar-menu {
@@ -40,18 +42,23 @@
   padding: 10px;
   margin: 10px 0;
   background-color: #fff;
-  border-radius: 30px;
+  border-radius: 20px;
   cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #003366;
+  transition: background-color 0.3s ease;
 }
 
 .sidebar-item:hover {
-  background-color: #ddd;
+  background-color: #e6e6e6;
 }
 
 .sidebar.collapsed .sidebar-item {
-  display: none; /* Hide the menu items when collapsed */
+  display: none;
 }
 
 .sidebar.collapsed + .content {
-  margin-left: 60px; /* Adjust the margin for the content when collapsed */
+  margin-left: 60px;
 }

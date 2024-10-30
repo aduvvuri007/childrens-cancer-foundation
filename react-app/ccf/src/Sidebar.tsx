@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
 
-const Sidebar: React.FC = () => {
-  // State to handle the collapsed/expanded state
+interface SidebarProps {
+  links: { name: string; path: string }[]; // Accepts an array of link objects as props
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ links }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  // Function to toggle collapse
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -17,14 +19,13 @@ const Sidebar: React.FC = () => {
           {isCollapsed ? ">>>" : "<<<"}
         </button>
       </div>
-      {/* Only show the menu when the sidebar is not collapsed */}
       {!isCollapsed && (
         <ul className="sidebar-menu">
-          <li className="sidebar-item">Home</li>
-          <li className="sidebar-item">Proposals</li>
-          <li className="sidebar-item">Reviewers</li>
-          <li className="sidebar-item">All Accounts</li>
-          <li className="sidebar-item">Email Blast</li>
+          {links.map((link, index) => (
+            <li key={index} className="sidebar-item">
+              {link.name}
+            </li>
+          ))}
         </ul>
       )}
     </div>

@@ -1,30 +1,71 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './pages/login';
+import Signup from './pages/signup';
+import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AccountPageApplicants from './create-acc-pages/create-acc-applicants/CreateAccApplicant';
+import AccountPageReviewers from './create-acc-pages/create-acc-reviewer/CreateAccReviewer';
+import ApplicantUsersDashboard from './applicant-dashboard/ApplicantDashboard';
 
-import Sidebar from "./Sidebar";
-
-// function App() {
-//   return (
-//     <div className="App">
-//     </div>
-//   );
-// }
-
-function App() {
-  const sidebarLinks = [
-    { name: "Home", path: "/" },
-    { name: "Account Settings", path: "/account-settings" },
-    { name: "Applications", path: "/applications" },
-  ];
-
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <Sidebar links={sidebarLinks} />
-      <div className="content">
-        <h1>Welcome to the Admin Dashboard</h1>
-      </div>
-    </div>
+    <BrowserRouter>
+    <Routes>
+        <Route
+          path="/" 
+          element={
+            <></>
+          } 
+        />
+        <Route
+          path="/Login" 
+          element={
+            <Login />
+          } 
+        />
+        {/* 404 page */}
+        <Route
+          path="*" 
+          element={
+            <></>
+          } 
+        />
+        <Route
+          path="/forgot-password" 
+          element={
+            <></>
+          } 
+        />
+        {/* Need to change path to create-account after authentication */}
+        <Route
+          path="/create-account-applicants" 
+          element={
+            <AccountPageApplicants />
+          } 
+        />        
+        <Route
+          path="/applicant-dashboard" 
+          element={
+            <ApplicantUsersDashboard />
+          } 
+        />    
+        {/* Admin dashboard */}   
+        <Route
+          path="/admin" 
+          element={
+            <></>
+          } 
+        />
+        {/* Need to change path to create-account after authentication */}
+        <Route
+          path="/create-account-reviewers" 
+          element={
+            <AccountPageReviewers />
+          } 
+        />            
+      </Routes>
+    </BrowserRouter>
   );
 }
 

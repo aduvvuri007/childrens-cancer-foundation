@@ -1,9 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Login from './pages/login';
-import Signup from './pages/signup';
+import Login from './login/login';
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountPageApplicants from './create-acc-pages/create-acc-applicants/CreateAccApplicant';
 import AccountPageReviewers from './create-acc-pages/create-acc-reviewer/CreateAccReviewer';
 import ApplicantUsersDashboard from './applicant-dashboard/ApplicantDashboard';

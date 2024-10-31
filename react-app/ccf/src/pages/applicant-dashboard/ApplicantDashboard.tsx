@@ -1,7 +1,7 @@
 import "./ApplicantDashboard.css";
 import { useEffect, useState } from "react";
 import {FaArrowDown, FaArrowUp, FaFileAlt, FaArrowRight} from "react-icons/fa";
-import logo from "../assets/ccf-logo.png";
+import logo from "../../assets/ccf-logo.png";
 
 function ApplicantUsersDashboard(): JSX.Element {
 

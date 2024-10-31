@@ -1,19 +1,20 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Login from './login/login';
+import Login from './pages/login/login';
 import './App.css';
-import AccountPageApplicants from './create-acc-pages/create-acc-applicants/CreateAccApplicant';
-import AccountPageReviewers from './create-acc-pages/create-acc-reviewer/CreateAccReviewer';
-import ApplicantUsersDashboard from './applicant-dashboard/ApplicantDashboard';
+import AccountPageApplicants from './pages/create-acc-applicants/CreateAccApplicant';
+import AccountPageReviewers from './pages/create-acc-reviewer/CreateAccReviewer';
+import ApplicantUsersDashboard from './pages/applicant-dashboard/ApplicantDashboard';
+import Sidebar from "./components/sidebar/Sidebar";
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
     <Routes>
         <Route
-          path="/" 
+          path="/"
           element={
-            <></>
+              <></>
           } 
         />
         <Route

@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { loginUser } from "../services/auth_login";
 import "./../styles/login.css";
-import DrHanleyLabImage from '../assets/Dr. Hanley Lab 1.png';
-import toretsky from '../assets/toretskywithpatient 1.png';
-import yellowOverlay from '../assets/yellowoverlay.png';
+import DrHanleyLabImage from "../assets/Dr. Hanley Lab 1.png";
+import toretsky from "../assets/toretskywithpatient 1.png";
+import yellowOverlay from "../assets/yellowoverlay.png";
 
 function Login() {
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState<string | null>(null);
-  const [isWideScreen, setIsWideScreen] = useState<boolean>(window.innerWidth > 750);
+  const [isWideScreen, setIsWideScreen] = useState<boolean>(
+    window.innerWidth > 750
+  );
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -55,10 +57,15 @@ function Login() {
             <img src="/ccflogo.png" alt="Logo" className="logoImage" />
           </div>
           <h1 className="heading">Welcome!</h1>
-          <p>
-            New to CCF?{" "}
-            <Link to="/signup"><u>Create Account</u></Link>
-          </p>
+          <div className="loginText">
+            <p>
+              New to CCF?{" "}
+              <Link to="/signup">
+                <u>Create Account</u>
+              </Link>
+            </p>
+          </div>
+
           <label htmlFor="email">Email</label>
           <input
             name="email"
@@ -89,9 +96,11 @@ function Login() {
           >
             Log in
           </button>
-          <Link to="/forgot-password" className="forgotPasswordLink">
-            Forgot password?
-          </Link>
+          <div className="loginText">
+            <Link to="/forgot-password" className="forgotPasswordLink">
+              <u>Forgot password</u>
+            </Link>
+          </div>
         </form>
 
         {isWideScreen && (

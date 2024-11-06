@@ -6,6 +6,10 @@ import AccountPageApplicants from './pages/create-acc-applicants/CreateAccApplic
 import AccountPageReviewers from './pages/create-acc-reviewer/CreateAccReviewer';
 import ApplicantUsersDashboard from './pages/applicant-dashboard/ApplicantDashboard';
 import Sidebar from "./components/sidebar/Sidebar";
+import AdminProtectedRoute from './components/Routing/AdminProtectedRoute';
+import ApplicantProtectedRoute from './components/Routing/ApplicantProtectedRoute';
+import ReviewerProtectedRoute from './components/Routing/ReviewerProtectedRoute';
+
 
 function App(): JSX.Element {
   return (
@@ -46,7 +50,7 @@ function App(): JSX.Element {
         <Route
           path="/applicant-dashboard" 
           element={
-            <ApplicantUsersDashboard />
+            <ApplicantProtectedRoute element={<ApplicantUsersDashboard />} />
           } 
         />    
         {/* Admin dashboard */}   

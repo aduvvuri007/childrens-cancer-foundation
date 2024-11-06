@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { loginUser } from "../users/auth_login";
-import Button from "../buttons/Button";
+import { loginUser } from "../../users/auth_login";
 import "./login.css";
 
 function Login() {
@@ -68,16 +67,9 @@ function Login() {
           <label htmlFor="remember"> Remember me for 30 days</label>
         </div>
         {error && <p className="error">{error}</p>}
-        <Button
-          variant="red"
-          width="425px"
-          height="50px"
-          borderRadius="25px"
-          type="submit"
-          onClick={() => {}} // The form's onSubmit handler will handle the submission
-        >
+        <button title="Login" aria-label="Login" type="submit" className="button">
           Log in
-        </Button>
+        </button>
         <Link to="/forgot-password" className="forgotPasswordLink">Forgot password?</Link>
       </form>
     </div>

@@ -1,8 +1,7 @@
 import "./ApplicantDashboard.css";
 import { useEffect, useState } from "react";
-import { FaArrowDown, FaArrowUp, FaFileAlt, FaArrowRight } from "react-icons/fa";
-import Button from "../buttons/Button";
-import logo from "../assets/ccf-logo.png";
+import {FaArrowDown, FaArrowUp, FaFileAlt, FaArrowRight} from "react-icons/fa";
+import logo from "../../assets/ccf-logo.png";
 
 function ApplicantUsersDashboard(): JSX.Element {
 
@@ -42,13 +41,13 @@ function ApplicantUsersDashboard(): JSX.Element {
                             <FaFileAlt className="section-icon" />
                             <h2>Applications</h2>
                         </div>
-
+                        
                         <button onClick={toggleApplication} className="expand-collapse-btn">
                             {isApplicationCollapsed ? <FaArrowDown /> : <FaArrowUp />}
                         </button>
                     </div>
-
-
+                    
+                    
                     {!isApplicationCollapsed && (
                         <div className="ApplicantDashboard-application-box">
                             {inProgressApplications && Object.keys(inProgressApplications).length > 0 && (
@@ -62,7 +61,7 @@ function ApplicantUsersDashboard(): JSX.Element {
                                             </div>
                                             <div className="ApplicantDashboard-application-status">
                                                 <p>{application.status}</p>
-                                                <FaArrowRight className="application-status-icon" />
+                                                <FaArrowRight className="application-status-icon"/>
                                             </div>
                                         </div>
                                     ))}
@@ -70,7 +69,7 @@ function ApplicantUsersDashboard(): JSX.Element {
                                 </>
                             )}
 
-                            {completedApplications && Object.keys(completedApplications).length > 0 && (
+                            {completedApplications && Object.keys(completedApplications).length > 0 &&(
                                 <>
                                     <h3>COMPLETED APPLICATIONS:</h3>
                                     {completedApplications.map((application: any, index: number) => (
@@ -81,20 +80,19 @@ function ApplicantUsersDashboard(): JSX.Element {
                                             </div>
                                             <div className="ApplicantDashboard-application-status">
                                                 <p>{application.status}</p>
-                                                <FaArrowRight className="application-status-icon" />
+                                                <FaArrowRight className="application-status-icon"/>
                                             </div>
                                         </div>
                                     ))}
                                     <hr className="red-line" />
                                 </>
                             )}
-
+        
                             <h3>START YOUR APPLICATION:</h3>
                             <div className="ApplicantDashboard-buttons">
-                                <Button width="25%" height="46px">NextGen</Button>
-                                <Button width="25%" height="46px">Research Grant</Button>
-                                <Button width="25%" height="46px">Non-Research Grant</Button>
-
+                                <button className="application-btn">NextGen</button>
+                                <button className="application-btn">Research Grant</button>
+                                <button className="application-btn">Non-Research Grant</button>
                             </div>
                         </div >
                     )}
@@ -117,7 +115,7 @@ function ApplicantUsersDashboard(): JSX.Element {
                             <li>Question 3</li>
                         </ul>
                     )}
-
+                    
                 </div>
 
                 <div className="ApplicantDashboard-section">

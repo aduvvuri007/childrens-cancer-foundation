@@ -10,6 +10,7 @@ import AdminProtectedRoute from './components/Routing/AdminProtectedRoute';
 import ApplicantProtectedRoute from './components/Routing/ApplicantProtectedRoute';
 import ReviewerProtectedRoute from './components/Routing/ReviewerProtectedRoute';
 import CreateAccMenu from './pages/create-acc-menu/CreateAccMenu';
+import ApplicantResults from './pages/applicant-results/applicant-results';
 
 function App(): JSX.Element {
   return (
@@ -74,6 +75,12 @@ function App(): JSX.Element {
           element={
             <AccountPageReviewers />
           } 
+        />
+        <Route
+          path="/applicant-results" 
+          element={
+            <ApplicantResults />
+          }
         />            
       </Routes>
     </BrowserRouter>

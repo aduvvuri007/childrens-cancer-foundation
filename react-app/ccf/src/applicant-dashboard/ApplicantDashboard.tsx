@@ -15,13 +15,11 @@ function ApplicantUsersDashboard(): JSX.Element {
 
     const [completedApplications, setCompletedApplications] = useState<any>([]);
     const [inProgressApplications, setInProgressApplications] = useState<any>([]);
-    const [deadline, setDeadline] = useState<Date | null>(null);
 
     useEffect(() => {
         // Fetch data from the backend
         //setCompletedApplications(data);
         //setinProgressApplications(data);
-        //setDeadline(data);
 
         setCompletedApplications([{ "applicationType": "NextGen", "status": "FUNDED" }, { "applicationType": "Research Grant", "status": "NOT FUNDED" }]);
         setInProgressApplications([{ "applicationType": "Research Grant", "status": "SUBMITTED: MAY 5, 2024" }]);
